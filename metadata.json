@@ -1,0 +1,6 @@
+{
+  "name": "Airi AI Desktop Companion",
+  "description": "Sleek virtual assistant and study companion with voice synthesis, face mesh tracking, vector memory, study logs, and downloadable MacBook source scripts.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
