@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen&family=VT323&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -5,8 +6,43 @@
   --color-brand-pink: #FF2D55;
   --color-brand-cyan: #00F2FF;
   --color-brand-violet: #7000FF;
+  
+  --font-pixel: "VT323", "Silkscreen", monospace;
+  --font-press: "Press Start 2P", monospace;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-sans: "Inter", sans-serif;
 }
 
 body {
   background-color: var(--color-brand-black);
+  font-family: var(--font-sans);
+}
+
+/* Custom retro-scanline scan effect */
+.scanline::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 20;
+  background-size: 100% 3px, 3px 100%;
+  pointer-events: none;
+}
+
+/* Custom scrollbars for glass panels */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 45, 85, 0.3);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 45, 85, 0.5);
 }

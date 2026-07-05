@@ -328,10 +328,37 @@ export default function AiriCharacter({ emotion, isSpeaking }: AiriCharacterProp
         }
       }
 
-      // --- Hair Back ---
-      // Warm chestnut brown hair
-      const hairColor = "#5a3a22";
-      const hairColorDark = "#422815";
+      // --- Hair Back / Twintails ---
+      const hairColor = "#7a63a5";      // Purple hair color
+      const hairColorDark = "#55447a";  // Darker shade
+      const ribbonColor = "#00F2FF";    // Cyan ribbon band
+
+      // Left Twintail
+      const leftTailSway = Math.sin(time * 1.2) * 5;
+      ctx.fillStyle = hairColor;
+      ctx.beginPath();
+      ctx.ellipse(65 + swayX, 85 + swayY + leftTailSway, 22, 38, Math.PI / 6 + leftTailSway * 0.05, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = hairColorDark;
+      ctx.beginPath();
+      ctx.ellipse(62 + swayX, 88 + swayY + leftTailSway, 15, 30, Math.PI / 6 + leftTailSway * 0.05, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Right Twintail
+      const rightTailSway = Math.cos(time * 1.2) * 5;
+      ctx.fillStyle = hairColor;
+      ctx.beginPath();
+      ctx.ellipse(185 + swayX, 85 + swayY + rightTailSway, 22, 38, -Math.PI / 6 - rightTailSway * 0.05, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = hairColorDark;
+      ctx.beginPath();
+      ctx.ellipse(188 + swayX, 88 + swayY + rightTailSway, 15, 30, -Math.PI / 6 - rightTailSway * 0.05, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Twintail Hair Ties (Cyan clips)
+      ctx.fillStyle = ribbonColor;
+      ctx.fillRect(72 + swayX, 62 + swayY, 10, 6);
+      ctx.fillRect(168 + swayX, 62 + swayY, 10, 6);
 
       // --- Front bangs & Side strands (Over the face) ---
       ctx.fillStyle = hairColor;
@@ -376,45 +403,133 @@ export default function AiriCharacter({ emotion, isSpeaking }: AiriCharacterProp
       ctx.closePath();
       ctx.fill();
 
-      // Hair Ribbons / Hairpins (Airi's yellow hair pins)
-      ctx.fillStyle = "#f6ad55"; // Golden pin
+      // Hair Ribbons / Hairpins (Airi's cyan hair pins matching image)
+      ctx.fillStyle = ribbonColor;
       ctx.fillRect(84 + swayX, 78 + swayY, 12, 4);
       ctx.fillRect(154 + swayX, 78 + swayY, 12, 4);
 
-      // --- Body Coat / Sailor Uniform ---
-      ctx.fillStyle = "#2d3748"; // Dark navy sailor coat
+      // --- WOODEN STUDY DESK SURFACE (Bottom of Canvas) ---
+      ctx.fillStyle = "#8d5d36"; // Warm brown desk
+      ctx.fillRect(0, 205, canvas.width, 35);
+      ctx.fillStyle = "#6f4625"; // Desk shadow
+      ctx.fillRect(0, 205, canvas.width, 4);
+
+      // --- OPEN WORKBOOK (On Desk) ---
+      ctx.fillStyle = "#f8f9fa"; // White book pages
       ctx.beginPath();
-      ctx.moveTo(85, 180 + swayY);
-      ctx.lineTo(165, 180 + swayY);
-      ctx.lineTo(185, 230 + swayY);
-      ctx.lineTo(65, 230 + swayY);
+      ctx.moveTo(90, 240);
+      ctx.lineTo(95, 212);
+      ctx.quadraticCurveTo(125, 208, 140, 216); // Left page top curve
+      ctx.lineTo(140, 240);
       ctx.closePath();
       ctx.fill();
 
-      // Collar trim
+      ctx.beginPath();
+      ctx.moveTo(140, 216);
+      ctx.quadraticCurveTo(155, 208, 185, 212); // Right page top curve
+      ctx.lineTo(190, 240);
+      ctx.lineTo(140, 240);
+      ctx.closePath();
+      ctx.fill();
+
+      // Book bindings and lines
+      ctx.strokeStyle = "#cbd5e1";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      // Left lines
+      ctx.moveTo(102, 220); ctx.lineTo(132, 220);
+      ctx.moveTo(100, 226); ctx.lineTo(132, 226);
+      ctx.moveTo(98, 232);  ctx.lineTo(132, 232);
+      // Right lines
+      ctx.moveTo(148, 220); ctx.lineTo(178, 220);
+      ctx.moveTo(148, 226); ctx.lineTo(180, 226);
+      ctx.moveTo(148, 232); ctx.lineTo(182, 232);
+      ctx.stroke();
+
+      ctx.strokeStyle = "#94a3b8";
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(140, 214);
+      ctx.lineTo(140, 240); // Spine line
+      ctx.stroke();
+
+      // --- COZY YELLOW HOODIE (Replaces Sailor Uniform) ---
+      const hoodieYellow = "#fcb813";       // Golden yellow hoodie
+      const hoodieYellowDark = "#e0a104";   // Darker fold shading
+      
+      ctx.fillStyle = hoodieYellow;
+      ctx.beginPath();
+      ctx.moveTo(85, 176 + swayY);
+      ctx.lineTo(165, 176 + swayY);
+      ctx.lineTo(185, 215);
+      ctx.lineTo(65, 215);
+      ctx.closePath();
+      ctx.fill();
+
+      // Hoodie hood folds behind head
+      ctx.fillStyle = hoodieYellowDark;
+      ctx.beginPath();
+      ctx.arc(125 + swayX, 158 + swayY, 26, 0, Math.PI, false);
+      ctx.fill();
+
+      // White Bunny Print Logo on Chest
       ctx.fillStyle = "#ffffff";
+      // Left ear
       ctx.beginPath();
-      ctx.moveTo(95, 180 + swayY);
-      ctx.lineTo(155, 180 + swayY);
-      ctx.lineTo(125, 205 + swayY);
+      ctx.ellipse(120, 185 + swayY, 2, 6, -Math.PI / 12, 0, Math.PI * 2);
+      ctx.fill();
+      // Right ear
+      ctx.beginPath();
+      ctx.ellipse(130, 185 + swayY, 2, 6, Math.PI / 12, 0, Math.PI * 2);
+      ctx.fill();
+      // Bunny head
+      ctx.beginPath();
+      ctx.arc(125, 194 + swayY, 5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Left sleeve/hand resting on face
+      ctx.fillStyle = hoodieYellow;
+      ctx.beginPath();
+      // Sleeve fold up
+      ctx.moveTo(70, 215);
+      ctx.lineTo(82, 175);
+      ctx.lineTo(95, 175);
+      ctx.lineTo(85, 215);
+      ctx.closePath();
+      ctx.fill();
+      
+      // Hand in skin color supporting head
+      ctx.fillStyle = "#ffebe0";
+      ctx.beginPath();
+      ctx.arc(92 + swayX, 142 + swayY, 7, 0, Math.PI * 2); // Soft hand fist
+      ctx.fill();
+
+      // Right arm writing
+      ctx.fillStyle = hoodieYellow;
+      ctx.beginPath();
+      ctx.moveTo(170, 215);
+      ctx.lineTo(152, 232);
+      ctx.lineTo(165, 235);
+      ctx.lineTo(182, 215);
       ctx.closePath();
       ctx.fill();
 
-      // Inner tie/shirt opening
-      ctx.fillStyle = "#ffffff";
+      // Right Hand skin color writing
+      ctx.fillStyle = "#ffebe0";
       ctx.beginPath();
-      ctx.moveTo(115, 180 + swayY);
-      ctx.lineTo(135, 180 + swayY);
-      ctx.lineTo(125, 192 + swayY);
-      ctx.closePath();
+      ctx.arc(148, 230, 6, 0, Math.PI * 2);
       ctx.fill();
 
-      // Sailor Collar flap on back shoulders
-      ctx.fillStyle = "#1a202c";
-      ctx.fillRect(72, 190 + swayY, 20, 25);
-      ctx.fillRect(158, 190 + swayY, 20, 25);
+      // Blue Pen held by right hand
+      ctx.strokeStyle = "#00b2ff"; // Blue pen
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.moveTo(142, 236);
+      ctx.lineTo(153, 222); // Pencil pointing down to book
+      ctx.stroke();
 
       // --- Draw Particles ---
+
       particlesRef.current.forEach((p) => {
         ctx.save();
         ctx.globalAlpha = p.alpha;
